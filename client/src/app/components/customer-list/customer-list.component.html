@@ -1,0 +1,24 @@
+
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let customer of customers">
+      <tr>
+        <th scope="row">{{customer.id}} </th>
+        <td> {{customer.nombre}} </td>
+        <td> {{customer.apellido}} </td>
+        <td> {{customer.telefono == null ? 'No Aplica' : customer.telefono}} </td>
+        <td> <a [routerLink]="['/clientes/edit', customer.id]" class="btn btn-info btn-block"> <i class= "fa-regular fa-pen-to-square"></i> </a> </td>
+        <td> <button type="button" class="btn" (click)="deleteCustomer(customer.id)"> <i class="fas fa-trash-alt" style="color: #ff0000;"></i> </button>  </td>
+      </tr>
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary"> <a routerLink="/clientes/agregar" class="text-white" style="text-decoration: none;">Agregar Cliente</a> </button>
