@@ -2,20 +2,21 @@
   <div class="col-md-4 offset-md-4">
     <div class="card">
       <div class="card-body">
-        <form class="">
+        <form [formGroup]="customerForm" >
           <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="nombre" [(ngModel)]="customer.nombre" class="form-control" id="name">
+            <input type="text" name="nombre" formControlName="nombre" class="form-control" id="name">
           </div>
           <div class="mb-3">
             <label for="lastName" class="form-label">Apellido</label>
-            <input type="text" name="latName" [(ngModel)]="customer.apellido" class="form-control" id="lastName">
+            <input type="text" name="apellido" formControlName="apellido" class="form-control" id="lastName">
           </div>
           <div class="mb-3">
             <label for="phoneNumber" class="form-label">Teléfono</label>
-            <input type="text" name="phoneNumber" [(ngModel)]="customer.telefono" class="form-control" id="phoneNumber" pattern="^[0-9]+$" title="Ingresa solo números">
+            <input type="text" name="telefono" formControlName="telefono" class="form-control" id="phoneNumber" pattern="^[0-9]+$" title="Ingresa solo números">
           </div>
-          <button type="button" class="btn btn-primary" (click)="edit ? updateCustomer() : saveNewCustomer()"> Guardar </button>
+          <button type="button" class="btn btn-primary" *ngIf="edit" (click)="updateCustomer()">Actualizar Cliente</button>
+          <button type="button" class="btn btn-primary" *ngIf="!edit" (click)="saveNewCustomer()">Guardar Nuevo Cliente</button> 
         </form>
       </div>
     </div>

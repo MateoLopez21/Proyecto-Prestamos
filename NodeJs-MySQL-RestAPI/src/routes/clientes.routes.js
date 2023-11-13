@@ -10,7 +10,7 @@ router.get('/clientes/:id', getCliente)
 
 router.post('/clientes', createClientes)
 
-//router.put('/clientes/:id', updateClientes)
+// router.put('/clientes/:id', updateClientes)
 router.patch('/clientes/:id', updateClientes)
 
 router.delete('/clientes/:id', deleteCliente)

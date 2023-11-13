@@ -1,0 +1,43 @@
+<form [formGroup]="myForm" (ngSubmit)="saveLoan()">
+<h1 mat-dialog-title> {{inputdata.title}} </h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="cliente_id" placeholder="Selecciona un cliente">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.nombre + ' ' + customer.apellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Monto</mat-label>
+        <input formControlName="monto" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Total a pagar</mat-label>
+        <input formControlName="total_pagar" matInput [(ngModel)]="totalPagar" placeholder="Ingresa el total a pagar">
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Fecha de Inicio</mat-label>
+        <input formControlName="fecha_inicio" matInput >
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Próximo Pago</mat-label>
+        <input formControlName="proximo_pago" matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [value]="formatDate(selectedDate)"  placeholder="Elija una fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Número de Cuotas</mat-label>
+        <input formControlName="cuotas" matInput [(ngModel)]="numeroCuotas" (change)="calculateValueDues(totalPagar, numeroCuotas)" placeholder="Ingresa el número de cuotas">
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Valor de la Cuota</mat-label>
+        <input formControlName="monto_cuota" matInput  >
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+     <button (click)="closePopup()" mat-raised-button color="warn"> Cerrar </button>
+     <button mat-raised-button color="primary"> Guardar </button>
+</div>
+</form>

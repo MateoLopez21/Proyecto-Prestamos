@@ -82,6 +82,7 @@ export const updateClientes = async (req, res) => {
         const [rows] = await pool.query('SELECT * FROM clientes WHERE id = (?)', [id])
         
         res.json(rows[0])
+        console.log("Cliente actualizado")
     } catch (error) {
         return res.status(500).json({
             message: 'Something went wrong'

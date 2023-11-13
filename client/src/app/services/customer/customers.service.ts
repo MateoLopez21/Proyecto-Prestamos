@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Customer } from '../models/customer';
+import { Customer } from '../../models/customer';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +29,7 @@ export class CustomersService {
     return this.http.delete(`${this.API_URI}/clientes/${id}`);
   }
 
-  updateCustomer(id:string|number, updatedCustomer:Customer){
+  updateCustomer(id: number, updatedCustomer:Customer): Observable<Customer>{
     return this.http.patch(`${this.API_URI}/clientes/${id}`, updatedCustomer);
   }
 }

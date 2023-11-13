@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CustomersService } from '../../services/customers.service'
+import { CustomersService } from '../../services/customer/customers.service'
 
 @Component({
   selector: 'app-customer-list',
@@ -10,6 +10,7 @@ import { CustomersService } from '../../services/customers.service'
 export class CustomerListComponent implements OnInit {
 
   customers: any = []
+  dtoptions: DataTables.Settings = {}
 
   constructor(private customerService: CustomersService) { }
 
