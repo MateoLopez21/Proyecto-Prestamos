@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" (ngSubmit)="saveLoan()">
+<form [formGroup]="myForm" >
 <h1 mat-dialog-title> {{inputdata.title}} </h1>
 <div mat-dialog-content>
     <mat-form-field>
@@ -33,11 +33,13 @@
       </mat-form-field>
     <mat-form-field>
         <mat-label>Valor de la Cuota</mat-label>
-        <input formControlName="monto_cuota" matInput  >
+        <input formControlName="monto_cuota" matInput  readonly>
       </mat-form-field>
 </div>
 <div mat-dialog-actions>
      <button (click)="closePopup()" mat-raised-button color="warn"> Cerrar </button>
-     <button mat-raised-button color="primary"> Guardar </button>
+
+     <button type="button" *ngIf="edit" (click)="editLoan(inputdata.id)"  mat-raised-button color="primary"> Actualizar </button>
+     <button *ngIf="!edit" (click)="saveLoan()" mat-raised-button color="primary"> Guardar </button>
 </div>
 </form>

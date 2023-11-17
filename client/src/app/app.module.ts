@@ -15,8 +15,12 @@ import { LoansComponent } from './components/loans/loan-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './material-module';
 import { DataTablesModule } from 'angular-datatables';
-import { PopupLoanComponent } from './components/popup/popup-loan/popup-loan.component';
-import { DateFormatPipe } from './date-format.pipe'
+import { PopupLoanComponent } from './components/popup/loan/popup-loan.component';
+import { DateFormatPipe } from './date-format.pipe';
+import { PopupPaymentComponent } from './components/popup/payment/popup-payment.component'
+import { ToastrModule } from 'ngx-toastr';
+import { PaymentListComponent } from './components/payments/payment-list.component';
+
 
 
 @NgModule({
@@ -27,7 +31,9 @@ import { DateFormatPipe } from './date-format.pipe'
     CustomerListComponent,
     LoansComponent,
     PopupLoanComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    PopupPaymentComponent,
+    PaymentListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,12 @@ import { DateFormatPipe } from './date-format.pipe'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    DataTablesModule
+    DataTablesModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Duración predeterminada de las notificaciones
+      positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
+      preventDuplicates: true, // Evitar mostrar notificaciones duplicadas
+    })
   ],
   providers: [
     CustomersService

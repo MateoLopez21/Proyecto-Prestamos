@@ -13,6 +13,7 @@ router.post('/prestamos', createPrestamos)
 // router.put('/Prestamos/:id', updatePrestamos)
 router.patch('/prestamos/:id', updatePrestamo)
 
+// router.patch('/prestamos/edit/:id', deletePrestamo)
 router.delete('/prestamos/:id', deletePrestamo)
 
 export default router

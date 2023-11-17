@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerListComponent } from './components/customer-list/customer-list.component'
 import { CustomerFormComponent } from './components/customer-form/customer-form.component'
 import { LoansComponent } from './components/loans/loan-list.component'
+import { PaymentListComponent } from './components/payments/payment-list.component';
 
 
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   },
   {path: 'prestamos',
   component: LoansComponent
+  },
+  {
+    path: 'pagos',
+    component: PaymentListComponent
   }
 ];
 

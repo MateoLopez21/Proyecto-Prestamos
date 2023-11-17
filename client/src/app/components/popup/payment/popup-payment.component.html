@@ -1,0 +1,34 @@
+<form [formGroup]="paymentForm" >
+    <h1 mat-dialog-title> {{ inputdata.title }} </h1>
+    <div mat-dialog-content>
+        <mat-form-field style="display: none;">
+            <mat-label>Id del Préstamo</mat-label>
+            <input formControlName="prestamo_id" matInput [value]="inputdata.id" readonly>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cantidad de Cuotas</mat-label>
+            <mat-select formControlName="cuotas" >
+                <mat-option *ngFor="let cuota of cuotasOptions" [value]="cuota" > 
+                    {{ cuota }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Fecha de Pago</mat-label>
+            <input formControlName="fecha_pago" matInput readonly>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Próximo Pago</mat-label>
+            <input formControlName="proximo_pago" matInput readonly>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Valor de la Cuota</mat-label>
+            <input formControlName="monto_pago" matInput readonly>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button (click)="closePopup()" mat-raised-button class="bg-seconday"> Cerrar </button>
+        <button (click)="savePayment()" mat-raised-button class="bg-primary" style="color: #fff"> Pagar </button>
+
+    </div>
+    </form>

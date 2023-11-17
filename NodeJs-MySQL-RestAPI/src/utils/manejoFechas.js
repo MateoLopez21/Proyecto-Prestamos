@@ -1,6 +1,6 @@
 export class manejoFechas {
-    constructor() {
-      this.fechaActual = new Date();
+    constructor(date) {
+      this.fechaActual = new Date(date);
     }
   
     formatearFecha(fecha) {

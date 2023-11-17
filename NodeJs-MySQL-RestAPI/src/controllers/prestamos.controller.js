@@ -27,7 +27,7 @@ export const getPrestamos = async (req, res) => {
 }
 
 export const getPrestamo = async (req, res) => {
-    const query = `SELECT prestamo_id, clientes.id AS idCliente, clientes.nombre AS nombre, clientes.apellido AS apellido, monto, total_pagar, resta, DATE_FORMAT(fecha_inicio, '%d-%m-%Y') AS fecha_inicio, DATE_FORMAT(proximo_pago, '%d-%m-%Y') AS proximo_pago, monto_cuota, cuotas FROM Prestamos
+    const query = `SELECT prestamo_id, clientes.id AS idCliente, clientes.nombre AS nombre, clientes.apellido AS apellido, monto, total_pagar, resta, DATE_FORMAT(fecha_inicio, '%Y-%m-%d') AS fecha_inicio, DATE_FORMAT(proximo_pago, '%Y-%m-%d') AS proximo_pago, monto_cuota, cuotas FROM Prestamos
                 INNER JOIN clientes ON prestamos.cliente_id = clientes.id
                 WHERE prestamos.prestamo_id = (?)`
     try {
@@ -57,7 +57,11 @@ export const createPrestamos = async (req, res) => {
     try {
         const[rows] = await pool.query(insertQuery, [cliente_id, monto, total_pagar, fecha_inicio, proximo_pago, monto_cuota, cuotas, total_pagar])
 
-        const[updateRows] = await pool.query(updateQuery, [monto, intereses])
+        if(rows.affectedRows > 0) {
+            console.log('Se agregó el prestamo')
+            const[updateRows] = await pool.query(updateQuery, [monto, intereses])
+        }
+
         res.send({ 
             prestamo_id: rows.insertId, 
             cliente_id: cliente_id,
@@ -79,13 +83,21 @@ export const createPrestamos = async (req, res) => {
 }
 
 export const deletePrestamo = async (req, res) => {
+    const { id } = req.params;
+    const selectResta = `SELECT monto, total_pagar FROM prestamos WHERE prestamo_id = (?)`
+
     try {
-        const [result] = await pool.query('DELETE FROM prestamos WHERE prestamo_id = (?)', [req.params.id])
-        console.log(result)
+        const [monto] = await pool.query(selectResta, [id])
+        const [result] = await pool.query('UPDATE prestamos SET activo = FALSE WHERE prestamo_id = (?)', [id])
+        console.log(monto[0].monto)
 
         if (result.affectedRows <= 0) return res.status(404).json({ 
             message: 'No se encontró ningún préstamo con ese id' 
         })
+        const intereses = monto[0].total_pagar - monto[0].monto
+        console.log(intereses)
+        const [rows] = await pool.query('UPDATE finanzas SET total_disponible_prestar = total_disponible_prestar + (?), ganancias_intereses = ganancias_intereses - (?)  WHERE finanzas_id = 1', [monto[0].monto, intereses])
+        console.log(result)
         res.sendStatus(204)
         console.log('Préstamo eliminado correctamente')
     } catch (error) {
