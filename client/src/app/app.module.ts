@@ -14,12 +14,12 @@ import { CustomersService } from './services/customer/customers.service';
 import { LoansComponent } from './components/loans/loan-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './material-module';
-import { DataTablesModule } from 'angular-datatables';
 import { PopupLoanComponent } from './components/popup/loan/popup-loan.component';
 import { DateFormatPipe } from './date-format.pipe';
 import { PopupPaymentComponent } from './components/popup/payment/popup-payment.component'
 import { ToastrModule } from 'ngx-toastr';
 import { PaymentListComponent } from './components/payments/payment-list.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 
 
@@ -33,7 +33,8 @@ import { PaymentListComponent } from './components/payments/payment-list.compone
     PopupLoanComponent,
     DateFormatPipe,
     PopupPaymentComponent,
-    PaymentListComponent
+    PaymentListComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +44,6 @@ import { PaymentListComponent } from './components/payments/payment-list.compone
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    DataTablesModule,
     ToastrModule.forRoot({
       timeOut: 3000, // Duración predeterminada de las notificaciones
       positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones

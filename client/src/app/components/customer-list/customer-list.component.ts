@@ -10,7 +10,6 @@ import { CustomersService } from '../../services/customer/customers.service'
 export class CustomerListComponent implements OnInit {
 
   customers: any = []
-  dtoptions: DataTables.Settings = {}
 
   constructor(private customerService: CustomersService) { }
 
